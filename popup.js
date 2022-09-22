@@ -1,4 +1,14 @@
 let letsGo = document.getElementById("letsGo");
+let browseApp = document.getElementById("browseApp");
+
+browseApp.addEventListener("click", async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: goToSite
+  });
+});
 
 letsGo.addEventListener("click", async () => {
 
@@ -67,8 +77,8 @@ function getInfoFromDFM(selection) {
   url1 = "https://applens.trafficmanager.net/sites/" + appName + "?startTime=" + startTime + "&endTime=" + endTime + "&caseNumber=" + caseNumber;
   url2 = "https://wawsobserver.azurewebsites.windows.net/sites/" + appName;
   console.log("URL: " + url1)
-  //window.open(url1, '_blank').focus();
-  //window.open(url2, '_blank').focus();
+  window.open(url1, '_blank').focus();
+  window.open(url2, '_blank').focus();
 
   function getDate(startTime, difference) {
     initDate = startTime.replace("%20", " ")
@@ -88,6 +98,14 @@ function getInfoFromDFM(selection) {
     return today;
   }
 
+}
+
+
+function goToSite() {
+  statement = document.getElementById("id-c769b728-0b08-42b7-8c6c-19e1744381d6-1-msdfm_customerstatemente0dece4b-6fc8-4a8f-a065-082708572369-msdfm_customerstatement.fieldControl-text-box-text").value;
+  appName = statement.toString().split("Microsoft.Web/sites/")[1].split(/\r?\n/)[0];
+  url = "https://" + appName + ".azurewebsites.net";
+  window.open(url, '_blank').focus();
 }
 
 

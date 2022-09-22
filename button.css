@@ -2,7 +2,7 @@ button {
   background-color: #f78d1e;
   border: none;
   color: white;
-  padding: 12px 27px;
+  padding: 7px;
   width: 100%;
   text-align: center;
   text-decoration: none;
@@ -10,7 +10,8 @@ button {
   font-size: 12px;
   border-radius: 8px;
   transition-duration: 0.4s;
-  margin-top: 20px;
+  margin-top: 12px;
+  text-transform: uppercase;
 }
 
 button:hover {
@@ -20,12 +21,18 @@ button:hover {
 
 .box {
   width: 250px;
-  height: 350px;
   padding: 10px;
   background-color: white;
   border-radius: 8px;
 }
 
+h1{
+  font-size: 25px;
+  display: inline-block;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+}
 
 /* The container */
 .container {
