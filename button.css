@@ -19,6 +19,12 @@ button:hover {
   color: white;
 }
 
+h1 img {
+  float: left;
+  width: 40px;
+  margin-right: 10px;
+}
+
 .box {
   width: 250px;
   padding: 10px;
@@ -28,9 +34,8 @@ button:hover {
 
 h1{
   font-size: 25px;
-  display: inline-block;
-  border-bottom: 1px solid black;
-  padding-bottom: 15px;
+  border-bottom: 2px solid #1f85dd;
+  padding-bottom: 10px;
   text-transform: uppercase;
 }
 
