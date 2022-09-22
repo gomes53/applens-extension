@@ -1,5 +1,11 @@
+/*
+#1f85dd blue
+#f78d1e orange
+#37c5e3 light blue
+*/
+
 button {
-  background-color: #f78d1e;
+  background-color: #1f85dd;
   border: none;
   color: white;
   padding: 7px;
@@ -65,8 +71,8 @@ h1{
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   background-color: #1f85dd;
   border-radius: 50%;
 }
@@ -78,7 +84,7 @@ h1{
 
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: #1f85dd;
+  background-color: #f78d1e;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -95,10 +101,10 @@ h1{
 
 /* Style the indicator (dot/circle) */
 .container .checkmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
+ 	top: 8px;
+	left: 8px;
+	width: 3px;
+	height: 3px;
 	border-radius: 50%;
 	background: white;
 }
