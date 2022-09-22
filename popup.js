@@ -38,22 +38,23 @@ function getInfoFromDFM(selection) {
   timeframe = statement.toString().split("ProblemStartTime: ")[1].split(/\r?\n/)[0];
   day = timeframe.split(" ")[0].split("/");
   hours = timeframe.split(" ")[1].toString().slice(0, -3);
-  startTime = day[2] + "-" + day[0] + "-" + day[1] + "%20" + hours;
+  issueDate = day[2] + "-" + day[0] + "-" + day[1] + "%20" + hours;
   //x hours before startTime
 
-  today = getCurrentDay();
+  startTime = getCurrentDay();
   
   var endTime = "";
   if (selection == 1) {  
-    endTime = getDate(day, hours, 24)
+    startTime = issueDate;
+    endTime = getDate(startTime, 24) 
   } else if (selection == 2) {
-    endTime = getDate(day, hours, 1)
+    endTime = getDate(today, 1)
   } else if (selection == 3) {
-    endTime = getDate(day, hours, 12)
+    endTime = getDate(today, 12)
   } else if (selection == 4) {
-    endTime = getDate(day, hours, 48)
+    endTime = getDate(today, 48)
   } else if (selection == 5) {
-    endTime = getDate(day, hours, 72)
+    endTime = getDate(today, 72)
   }
 
   console.log("Start time: " + startTime);
@@ -63,16 +64,14 @@ function getInfoFromDFM(selection) {
   caseNumber = caseBox.toString().split(" |")[0].split(">").pop();
   console.log("Case number: " + caseNumber);
 
-
-  //https://applens.trafficmanager.net/sites/APPNAME?startTime=2022-09-20%2022:11&endTime=2022-09-21%2021:55&caseNumber=CASENUMBER
   url1 = "https://applens.trafficmanager.net/sites/" + appName + "?startTime=" + startTime + "&endTime=" + endTime + "&caseNumber=" + caseNumber;
   url2 = "https://wawsobserver.azurewebsites.windows.net/sites/" + appName;
-  console.log("URL: " + url)
+  console.log("URL: " + url1)
   //window.open(url1, '_blank').focus();
   //window.open(url2, '_blank').focus();
 
-  function getDate(day, hours, difference) {
-    initDate = day[2] + "-" + day[0] + "-" + day[1] + " " + hours
+  function getDate(startTime, difference) {
+    initDate = startTime.replace("%20", " ")
     var dt = new Date(initDate);
     dt.setHours( dt.getHours() - difference);
     end = dt.toLocaleString();
@@ -83,7 +82,10 @@ function getInfoFromDFM(selection) {
   }
 
   function getCurrentDay() {
-    return ""
+    const isoStr = new Date().toISOString();
+    today = isoStr.replace("T", "%20").slice(0, -8);
+    console.log("Today in UTC: " + today);
+    return today;
   }
 
 }
