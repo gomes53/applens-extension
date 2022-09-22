@@ -2,10 +2,36 @@
 <html>
   <head>
     <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <body>
-    <button id="changeColor"></button>
-    <button id="letsGo" type="button">Open AppLens</button>
+  <body class="box">
+    <div>
+      <h1>Smart Lens</h1>
+      <h2>Select the timeframe</h2>
+      <label class="container">Issue time 
+        <input id="t1" type="radio" checked="checked" name="radio"">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Last 1 hour
+        <input id="t2" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Last 12 hours
+        <input id="t3" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Last 24 hours
+        <input id="t4" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Last 3 days
+        <input id="t5" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+
+      <button id="letsGo" type="button"><i class="fa fa-search"></i> Open Tools</button>
+
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>
