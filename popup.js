@@ -50,21 +50,20 @@ function getInfoFromDFM(selection) {
   hours = timeframe.split(" ")[1].toString().slice(0, -3);
   issueDate = day[2] + "-" + day[0] + "-" + day[1] + "%20" + hours;
   //x hours before startTime
-
-  startTime = getCurrentDay();
+  endTime = getCurrentTime();
+  endTime = addSmallInitialBreak(endTime);
   
-  var endTime = "";
   if (selection == 1) {  
-    startTime = issueDate;
-    endTime = getDate(startTime, 24) 
+    endTime = issueDate;
+    startTime = getDate(endTime, 24) 
   } else if (selection == 2) {
-    endTime = getDate(today, 1)
+    startTime = getDate(today, 1)
   } else if (selection == 3) {
-    endTime = getDate(today, 12)
+    startTime = getDate(today, 12)
   } else if (selection == 4) {
-    endTime = getDate(today, 48)
+    startTime = getDate(today, 24)
   } else if (selection == 5) {
-    endTime = getDate(today, 72)
+    startTime = getDate(today, 72)
   }
 
   console.log("Start time: " + startTime);
@@ -84,18 +83,29 @@ function getInfoFromDFM(selection) {
     initDate = startTime.replace("%20", " ")
     var dt = new Date(initDate);
     dt.setHours( dt.getHours() - difference);
-    end = dt.toLocaleString();
+    end = dt.toLocaleString("en-GB");
     endDate = end.split(", ")[0].split("/")
     endHour = end.split(", ")[1].toString().slice(0, -3); 
     parsedDate = endDate[2] + "-" + endDate[1] + "-" + endDate[0] + "%20" + endHour;
     return parsedDate;
   }
 
-  function getCurrentDay() {
+  function getCurrentTime() {
     const isoStr = new Date().toISOString();
     today = isoStr.replace("T", "%20").slice(0, -8);
     console.log("Today in UTC: " + today);
     return today;
+  }
+
+  function addSmallInitialBreak(startTime) {
+    initDate = startTime.replace("%20", " ")
+    var dt = new Date(initDate);
+    dt.setMinutes( dt.getMinutes() - 16);
+    end = dt.toLocaleString("en-GB");
+    endDate = end.split(", ")[0].split("/")
+    endHour = end.split(", ")[1].toString().slice(0, -3); 
+    parsedDate = endDate[2] + "-" + endDate[1] + "-" + endDate[0] + "%20" + endHour;
+    return parsedDate;
   }
 
 }
@@ -107,7 +117,3 @@ function goToSite() {
   url = "https://" + appName + ".azurewebsites.net";
   window.open(url, '_blank').focus();
 }
-
-
-
-
