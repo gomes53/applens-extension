@@ -1,7 +1,7 @@
 {
   "name": "AppLens Shortcut",
   "description": "Developed by Diogo Gomes - diogogomes@microsoft.com",
-  "version": "1.0",
+  "version": "1.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
