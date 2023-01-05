@@ -217,10 +217,14 @@ function setNote(){
   console.log("print str")
   console.log(str)
   str.style.display = "inline"
+  
   var range = document.createRange()
   range.selectNode(str)
+  window.getSelection().removeAllRanges();
   window.getSelection().addRange(range)
   document.execCommand('copy')
+  document.query
+  
   str.style.display = "none"
   
 }
