@@ -214,8 +214,9 @@ function setNote(){
   }
   
   str = document.getElementById('note')
-  console.log("print str")
+  
   console.log(str)
+
   str.style.display = "inline"
   
   var range = document.createRange()
@@ -223,7 +224,6 @@ function setNote(){
   window.getSelection().removeAllRanges();
   window.getSelection().addRange(range)
   document.execCommand('copy')
-  document.query
   
   str.style.display = "none"
   
