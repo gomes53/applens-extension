@@ -1,6 +1,6 @@
 {
   "name": "AppLens Shortcut",
-  "description": "Developed by Diogo Gomes - diogogomes@microsoft.com",
+  "description": "Developed by Diogo Gomes - diogogomes@microsoft.com & Ajesh DS (ajeshds@microsoft.com)",
   "version": "1.3",
   "manifest_version": 3,
   "background": {
@@ -10,7 +10,8 @@
     "storage",
     "activeTab",
     "scripting",
-    "contextMenus"
+    "contextMenus",
+    "tabGroups"
   ],
   "action": {
     "default_popup": "popup.html"
