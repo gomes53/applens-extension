@@ -57,7 +57,7 @@ const openApplens = async (appName, time, tab) => {
   const endTime = getDate(getCurrentTime(), 16, true);
   const startTime = getDate(endTime, time);
   const appLens = `https://applens.trafficmanager.net/sites/${appName}?startTime=${startTime}&endTime=${endTime}&caseNumber=${caseNumber}`;
-  createTab(appLens, appName);
+  createTab(appLens, appName, caseNumber);
   //chrome.tabs.create({ url: appLens })
 };
 
@@ -82,14 +82,26 @@ const browseApp = (name) => {
 
 const copyNote = () => {};
 
-const createTab = async (url, appName) => {
-  if (!appName) {
+const createTab = async (url, appName, caseNumber = undefined) => {
+  if (!appName && !caseNumber) {
     return chrome.tabs.create({ url });
   }
 
-  const groups = await chrome.tabGroups.query({ title: appName });
-
   const tab = await chrome.tabs.create({ url });
+  const { grouping, groupingCaseNumber } = await chrome.storage.sync.get([
+    "grouping",
+    "groupingCaseNumber",
+  ]);
+
+  if (!grouping) {
+    return;
+  }
+
+  let title = appName;
+
+  if (groupingCaseNumber && caseNumber) title = caseNumber;
+
+  const groups = await chrome.tabGroups.query({ title });
 
   if (groups.length > 0) {
     const groupId = groups[0].id;
@@ -105,7 +117,7 @@ const createTab = async (url, appName) => {
   const randomTabColor =
     TAB_COLORS[Math.floor(Math.random() * TAB_COLORS.length)];
   await chrome.tabGroups.update(groupId, {
-    title: appName,
+    title,
     color: randomTabColor,
   });
 };
