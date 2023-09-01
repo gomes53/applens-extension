@@ -1,6 +1,8 @@
 let letsGo = document.getElementById("letsGo");
 let browseApp = document.getElementById("browseApp");
 let copyNote = document.getElementById("copyNote");
+let groupingCheck = document.getElementById("grouping");
+let groupingCaseNumberCheck = document.getElementById("groupingCaseNumber");
 
 copyNote.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -20,6 +22,29 @@ browseApp.addEventListener("click", async () => {
     function: goToSite
   });
 });
+
+document.addEventListener("DOMContentLoaded", async function () {
+  const { grouping, groupingCaseNumber } = await chrome.storage.sync.get([
+    "grouping",
+    "groupingCaseNumber",
+  ]);
+  groupingCheck.checked = grouping;
+  groupingCaseNumberCheck.disabled = !grouping;
+  groupingCaseNumberCheck.checked = groupingCaseNumber;
+});
+
+groupingCheck.addEventListener("change", async () => {
+  const isChecked = groupingCheck.checked
+  chrome.storage.sync.set({ grouping: isChecked });
+  groupingCaseNumberCheck.disabled = !isChecked;
+  
+});
+
+groupingCaseNumberCheck.addEventListener("change", async () => {
+  const isChecked = groupingCaseNumberCheck.checked;
+  chrome.storage.sync.set({ groupingCaseNumber: isChecked });
+});
+
 
 letsGo.addEventListener("click", async () => {
 
